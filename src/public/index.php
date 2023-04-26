@@ -7,6 +7,9 @@ use Phalcon\Mvc\Application;
 use Phalcon\Url;
 use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Config;
+use Phalcon\Escaper;
+use Phalcon\Logger;
+use Phalcon\Logger\Adapter\Stream;
 
 $config = new Config([]);
 
@@ -23,7 +26,16 @@ $loader->registerDirs(
         APP_PATH . "/models/",
     ]
 );
-
+$loader->registerNamespaces(
+    [
+        'MyApp\handle' => APP_PATH . '/handler/'
+    ]
+);
+$loader->registerClasses(
+    [
+        'Listner'   => APP_PATH . '/handler/Listner.php',
+    ]
+);
 $loader->register();
 
 $container = new FactoryDefault();
@@ -45,6 +57,26 @@ $container->set(
         return $url;
     }
 );
+$container->set(
+    'escaper',
+    function () {
+        return new Escaper();
+    }
+);
+$container->set(
+    'logger',
+    function () {
+        $adapter = new Stream(APP_PATH .'/logs/main.log');
+        $logger  = new Logger(
+            'messages',
+            [
+                'main' => $adapter,
+            ]
+        );
+
+        return $logger;
+    }
+);
 
 $application = new Application($container);
 
@@ -59,9 +91,9 @@ $container->set(
                 'username' => 'root',
                 'password' => 'secret',
                 'dbname'   => 'phalt',
-                ]
-            );
-        }
+            ]
+        );
+    }
 );
 
 $container->set(

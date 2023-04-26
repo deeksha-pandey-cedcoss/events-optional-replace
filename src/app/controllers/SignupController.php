@@ -29,7 +29,7 @@ class SignupController extends Controller
         $component->process();
 
 
-        $this->logger->info("Name is" . $_POST['name'] . "and email is" . $_POST['email']);
+      
 
         $user->assign(
             $this->request->getPost(),

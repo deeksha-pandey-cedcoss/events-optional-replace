@@ -7,7 +7,8 @@ use MyApp\handle\Aware;
 class SignupController extends Controller
 {
 
-    public function IndexAction() {
+    public function IndexAction() 
+    {
         // defalut action
     }
 

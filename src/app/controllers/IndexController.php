@@ -6,6 +6,6 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-    //    default action
+        //    default action
     }
 }

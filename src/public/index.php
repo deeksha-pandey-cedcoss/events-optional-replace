@@ -66,7 +66,7 @@ $container->set(
 $container->set(
     'logger',
     function () {
-        $adapter = new Stream(APP_PATH .'/logs/main.log');
+        $adapter = new Stream(APP_PATH . '/logs/main.log');
         $logger  = new Logger(
             'messages',
             [
@@ -79,8 +79,6 @@ $container->set(
 );
 
 $application = new Application($container);
-
-
 
 $container->set(
     'db',

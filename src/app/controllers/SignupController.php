@@ -1,46 +1,27 @@
 <?php
 
 use Phalcon\Mvc\Controller;
-use Phalcon\Events\Manager as EventsManager;
-use MyApp\handle\Aware;
+
 
 class SignupController extends Controller
 {
 
-    public function IndexAction() 
+    public function IndexAction()
     {
         // defalut action
     }
 
     public function registerAction()
     {
-        $user = new Users();
-        $eventsManager = new EventsManager();
-        
-        $component= new Aware();
-
-        $component->setEventsManager($eventsManager);
-        
-        $eventsManager->attach(
-            'test',
-            new Listner()
-        );
-       
-
-        $component->process();
-
-
-      
+        $user = new Names();
 
         $user->assign(
             $this->request->getPost(),
             [
                 'name',
-                'email' 
+                'quantity'
             ]
         );
-
-        
         $success = $user->save();
         $this->view->success = $success;
         if ($success) {

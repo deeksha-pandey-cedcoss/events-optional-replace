@@ -24,7 +24,7 @@ class Aware extends Injectable implements EventsAwareInterface
 
     public function process()
     {
-        $this->eventsManager->fire('test:escaperhtml', $this);
+        $this->eventsManager->fire('test:replacenumber', $this);
        
     }
 }
